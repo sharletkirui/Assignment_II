@@ -49,4 +49,9 @@ class dbConnection{
         $stmt = $this->connection->prepare($query);
         return $stmt->execute($params);
     }
+    public function select($query, $params = []) {
+        $stmt = $this->connection->prepare($query);
+        $stmt->execute($params);
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
 }
