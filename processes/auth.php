@@ -53,6 +53,15 @@ class auth {
             if (!ctype_alpha($username)) {
                 $errors['usernameLetters_err'] = "Invalid username format. Username must contain letters only without space";
             }
+            // Verify password length
+            if (strlen($password) < 4 || strlen($password) > 8) {
+                $errors['password_err'] = "Password must be between 4 and 8 characters.";
+            }
+
+            // Verify that the password and confirm password match
+            if ($password !== $confirm_password) {
+                $errors['confirm_password_err'] = "Passwords do not match.";
+            }
         }
     }
     public function login($conn, $ObjGlob) {
