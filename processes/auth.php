@@ -43,6 +43,16 @@ class auth {
             if ($spot_email_address_res > $exist_count) {
                 $errors['mailExists_err'] = "Email Already Exists";
             }
+            // Verify Username Already Exists
+            $spot_username_res = $conn->count_results(sprintf("SELECT username FROM users WHERE username = '%s' LIMIT 1", $username));
+            if ($spot_username_res > $exist_count) {
+                $errors['usernameExists_err'] = "Username Already Exists";
+            }
+
+            // Verify if username contain letters only
+            if (!ctype_alpha($username)) {
+                $errors['usernameLetters_err'] = "Invalid username format. Username must contain letters only without space";
+            }
         }
     }
     public function login($conn, $ObjGlob) {
