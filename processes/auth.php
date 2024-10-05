@@ -18,4 +18,16 @@ class auth {
             $confirm_password = $_POST["confirm_password"];
         }
     }
+    public function login($conn, $ObjGlob) {
+        if (isset($_POST["login"])) {
+            $errors = array();
+
+            $username = $conn->escape_values(strtolower($_POST["username"]));
+            $password = $_POST["password"];
+            if (count($errors)) {
+                $ObjGlob->setMsg('msg', 'Error(s)', 'invalid');
+                $ObjGlob->setMsg('errors', $errors, 'invalid');
+            }
+        }
+    }
 }
