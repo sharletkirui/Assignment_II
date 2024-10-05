@@ -105,6 +105,26 @@ class auth {
 
             $username = $conn->escape_values(strtolower($_POST["username"]));
             $password = $_POST["password"];
+            // Validate inputs
+            if (empty($username)) {
+                $errors['username_err'] = "Username is required.";
+            }
+            if (empty($password)) {
+                $errors['password_err'] = "Password is required.";
+            }
+
+            if (!count($errors)) {
+                // Check if user exists
+                $user_query = sprintf("SELECT * FROM users WHERE username = '%s' LIMIT 1", $username);
+                $user_result = $conn->query($user_query);
+                
+                if ($user_result->num_rows > 0) {
+                    $user = $user_result->fetch_assoc();
+
+                } else {
+                    $errors['username_err'] = "Username does not exist.";
+                }
+            }
             if (count($errors)) {
                 $ObjGlob->setMsg('msg', 'Error(s)', 'invalid');
                 $ObjGlob->setMsg('errors', $errors, 'invalid');
