@@ -11,7 +11,7 @@ class dbConnection{
     public function __construct($db_type, $db_host, $db_port, $db_user, $db_pass, $db_name){
         $this->db_type = $db_type;
         $this->db_host = $db_host;
-        $this->db_user = $db_port;
+        $this->db_port = $db_port;
         $this->db_user = $db_user;
         $this->db_pass = $db_pass;
         $this->db_name = $db_name;
