@@ -18,5 +18,18 @@ function ClassAutoload($ClassName){
 }
 spl_autoload_register('ClassAutoload');
 
+// Initialize global objects
+$ObjGlob = new fncs();
+$ObjSendMail = new SendMail();
+
+// Creating instances of all classes
+$ObjLayouts = new layouts();
+$ObjMenus = new menus();
+$Objforms = new forms();
+$ObjTables = new tables();
+$conn = new dbConnection(DBTYPE, HOSTNAME, DBPORT, HOSTUSER, HOSTPASS, DBNAME);
+
+// Create process instances
+$ObjAuth = new auth();
 
 ?>
