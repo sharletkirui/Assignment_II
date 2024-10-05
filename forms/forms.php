@@ -43,5 +43,30 @@ class forms {
             </div>
         <?php
     }
-     
+    public function login_form($ObjGlob) {
+        ?>
+        <div class="row align-items-md-stretch">
+            <div class="col-md-8">
+                <h2>Login</h2>
+                <?php
+                print $ObjGlob->getMsg('msg');
+                $err = $ObjGlob->getMsg('errors');
+                ?>
+                <form action="<?php print basename($_SERVER["PHP_SELF"]); ?>" method="POST" enctype="multipart/form-data">
+                    <div class="mb-3">
+                        <label for="username" class="form-label">Username:</label>
+                        <input type="text" name="username" class="form-control form-control-lg" maxlength="50" id="username" placeholder="Enter your username" <?php print (isset($_SESSION["username"])) ? 'value="'.$_SESSION["username"].'"'  : ''; unset($_SESSION["username"]); ?> >
+                        <?php print (isset($err['username_err'])) ? "<span class='invalid'>" . $err['username_err'] . "</span>" : '' ; ?>
+                    </div>
+                    <div class="mb-3">
+                        <label for="password" class="form-label">Password:</label>
+                        <input type="password" name="password" class="form-control form-control-lg" maxlength="50" id="password" placeholder="Enter your password">
+                        <?php print (isset($err['password_err'])) ? "<span class='invalid'>" . $err['password_err'] . "</span>" : '' ; ?>
+                    </div>
+                    <button type="submit" name="login" class="btn btn-primary">Login</button>
+                </form>
+            </div>
+        </div>
+        <?php
+    }   
 }
