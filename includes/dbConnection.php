@@ -45,4 +45,8 @@ class dbConnection{
                 break;
         }
     }
+    public function execute($query, $params = []) {
+        $stmt = $this->connection->prepare($query);
+        return $stmt->execute($params);
+    }
 }
