@@ -120,7 +120,19 @@ class auth {
                 
                 if ($user_result->num_rows > 0) {
                     $user = $user_result->fetch_assoc();
+                    // Verify password
+                    if (password_verify($password, $user['password'])) {
+                        // Set session variables
+                        $_SESSION['user_id'] = $user['id'];
+                        $_SESSION['username'] = $user['username'];
+                        $_SESSION['fullname'] = $user['fullname'];
 
+                        // Redirect or set a success message
+                        header('Location: tables.php'); // Redirect to a dashboard or home page
+                        exit();
+                    } else {
+                        $errors['password_err'] = "Invalid password.";
+                    }
                 } else {
                     $errors['username_err'] = "Username does not exist.";
                 }
