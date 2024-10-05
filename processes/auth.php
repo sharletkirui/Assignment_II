@@ -16,6 +16,14 @@ class auth {
             $username = $_SESSION["username"] = $conn->escape_values(strtolower($_POST["username"]));
             $password = $_POST["password"];
             $confirm_password = $_POST["confirm_password"];
+            // Implement input validation and error handling
+            // =============================================
+            // Sanitize all inputs
+
+            // Verify that the fullname has only letters, space, dash, quotation
+            if (ctype_alpha(str_replace(" ", "", str_replace("\'", "", $fullname))) === FALSE) {
+                $errors['nameLetters_err'] = "Invalid name format: Full name must contain letters and spaces only.";
+            }
         }
     }
     public function login($conn, $ObjGlob) {
